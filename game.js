@@ -28,25 +28,26 @@ $("body").on("keydown", function() {
    nextSequence();
    h1LevelChange();
   $("body").off("keydown");
+  $(".btn").on("click", function(event) {
+    var selectedID = event.target.id;
+    var userSelection = ("#" + selectedID);
+    var userSound = new Audio("./sounds/" + selectedID + ".mp3");
+
+    $(userSelection).addClass("pressed");
+    setTimeout(function() {
+    $(userSelection).removeClass("pressed")}, 100);
+
+
+    userClickedPattern.push(selectedID);
+    userSound.play();
+
+    console.log(userClickedPattern);
+    checkAnswer(userClickedPattern.length - 1);
+  //  equalArrays(gamePattern, userClickedPattern);
+  });
 });
 
-$(".btn").on("click", function(event) {
-  var selectedID = event.target.id;
-  var userSelection = ("#" + selectedID);
-  var userSound = new Audio("./sounds/" + selectedID + ".mp3");
 
-  $(userSelection).addClass("pressed");
-  setTimeout(function() {
-  $(userSelection).removeClass("pressed")}, 100);
-
-
-  userClickedPattern.push(selectedID);
-  userSound.play();
-
-  console.log(userClickedPattern);
-  checkAnswer(userClickedPattern.length - 1);
-//  equalArrays(gamePattern, userClickedPattern);
-});
 
 function checkAnswer(currentLevel) {
   if (gamePattern[currentLevel] === userClickedPattern[currentLevel] ) {
@@ -61,8 +62,33 @@ function checkAnswer(currentLevel) {
       $("body").removeClass("game-over");
     }, 200);
 
+    $(".btn").off("click");
     $(" h1#level-title").addClass("game-over-spacing");
     $("#level-title").text("Game Over, Press Any Key to Restart");
+    $("body").on("keydown", function() {
+        newGame();
+        h1LevelChange();
+        nextSequence();
+        $(".btn").on("click", function(event) {
+          var selectedID = event.target.id;
+          var userSelection = ("#" + selectedID);
+          var userSound = new Audio("./sounds/" + selectedID + ".mp3");
+
+          $(userSelection).addClass("pressed");
+          setTimeout(function() {
+          $(userSelection).removeClass("pressed")}, 100);
+
+
+          userClickedPattern.push(selectedID);
+          userSound.play();
+
+          console.log(userClickedPattern);
+          checkAnswer(userClickedPattern.length - 1);
+        //  equalArrays(gamePattern, userClickedPattern);
+        });
+    $("body").off("keydown");
+    });
+
   }
 }
 
@@ -80,6 +106,16 @@ function checkAnswer(currentLevel) {
 
   }
 };*/
+
+function newGame() {
+  gamePattern = [];
+  userClickedPattern = [];
+  level = 0;
+
+  //$(" h1#level-title").removeClass("game-over-spacing");
+
+
+}
 
 function h1LevelChange() {
   var newLevel = level++;
