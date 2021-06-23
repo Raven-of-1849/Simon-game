@@ -54,7 +54,7 @@ function checkAnswer(currentLevel) {
         setTimeout(nextSequence, 600);
     }
   } else {
-    console.log("Failure");
+    $("body").addClass("game-over");
   }
 }
 
