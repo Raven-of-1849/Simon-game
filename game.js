@@ -54,7 +54,15 @@ function checkAnswer(currentLevel) {
         setTimeout(nextSequence, 600);
     }
   } else {
+    roundLost.play();
+
     $("body").addClass("game-over");
+    setTimeout(function() {
+      $("body").removeClass("game-over");
+    }, 200);
+
+    $(" h1#level-title").addClass("game-over-spacing");
+    $("#level-title").text("Game Over, Press Any Key to Restart");
   }
 }
 
