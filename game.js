@@ -88,6 +88,31 @@ function checkAnswer(currentLevel) {
     $(".btn").off("click");
     $(" h1#level-title").addClass("game-over-spacing");
     $("#level-title").text("Game Over, Press Any Key to Restart");
+
+    $("body").on("touchstart", function() {
+       nextSequence();
+       newGame();
+       h1LevelChange();
+      $("body").off("touchstart");
+      $(".btn").on("click", function(event) {
+        var selectedID = event.target.id;
+        var userSelection = ("#" + selectedID);
+        var userSound = new Audio("./sounds/" + selectedID + ".mp3");
+
+        $(userSelection).addClass("pressed");
+        setTimeout(function() {
+        $(userSelection).removeClass("pressed")}, 100);
+
+
+        userClickedPattern.push(selectedID);
+        userSound.play();
+
+        console.log(userClickedPattern);
+        checkAnswer(userClickedPattern.length - 1);
+      //  equalArrays(gamePattern, userClickedPattern);
+      });
+    });
+
     $("body").on("keydown", function() {
         newGame();
         h1LevelChange();
