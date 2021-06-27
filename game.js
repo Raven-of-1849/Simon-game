@@ -79,12 +79,12 @@ function checkAnswer(currentLevel) {
     }
   } else {
     roundLost.play();
-
+    vibrate(200);
     $("body").addClass("game-over");
     setTimeout(function() {
       $("body").removeClass("game-over");
     }, 200);
-    vibrate(200);
+
 
     $(".btn").off("click");
     $(" h1#level-title").addClass("game-over-spacing");
