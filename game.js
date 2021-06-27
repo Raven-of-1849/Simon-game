@@ -84,6 +84,7 @@ function checkAnswer(currentLevel) {
     setTimeout(function() {
       $("body").removeClass("game-over");
     }, 200);
+    window.navigator.vibrate(200);
 
     $(".btn").off("click");
     $(" h1#level-title").addClass("game-over-spacing");
