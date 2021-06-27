@@ -84,7 +84,7 @@ function checkAnswer(currentLevel) {
     setTimeout(function() {
       $("body").removeClass("game-over");
     }, 200);
-    window.navigator.vibrate(200);
+    vibrate(200);
 
     $(".btn").off("click");
     $(" h1#level-title").addClass("game-over-spacing");
@@ -170,6 +170,10 @@ function newGame() {
 function h1LevelChange() {
   var newLevel = level++;
   $("#level-title").text("Level " + newLevel);
+}
+
+function vibrate(duration) {
+  navigator.vibrate(duration);
 }
 
 /*function nextLevel() {
