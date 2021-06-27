@@ -15,12 +15,8 @@ function nextSequence() {
   currentSquareID.fadeOut(150).fadeIn(150);
   currentSound.play();
 
-
-
   h1LevelChange();
 
-
-  console.log(gamePattern);
 }
 
 $("body").on("touchstart", function() {
@@ -42,7 +38,6 @@ $("body").on("touchstart", function() {
 
     console.log(userClickedPattern);
     checkAnswer(userClickedPattern.length - 1);
-  //  equalArrays(gamePattern, userClickedPattern);
   });
 });
 
@@ -64,9 +59,7 @@ $("body").on("keydown", function() {
     userClickedPattern.push(selectedID);
     userSound.play();
 
-    console.log(userClickedPattern);
     checkAnswer(userClickedPattern.length - 1);
-  //  equalArrays(gamePattern, userClickedPattern);
   });
 });
 
@@ -79,7 +72,7 @@ function checkAnswer(currentLevel) {
     }
   } else {
     roundLost.play();
-    vibrate(200);
+
     $("body").addClass("game-over");
     setTimeout(function() {
       $("body").removeClass("game-over");
@@ -99,17 +92,14 @@ function checkAnswer(currentLevel) {
           var userSelection = ("#" + selectedID);
           var userSound = new Audio("./sounds/" + selectedID + ".mp3");
 
-          $(userSelection).addClass("pressed");
-          setTimeout(function() {
+        $(userSelection).addClass("pressed");
+        setTimeout(function() {
           $(userSelection).removeClass("pressed")}, 100);
-
 
           userClickedPattern.push(selectedID);
           userSound.play();
 
-          console.log(userClickedPattern);
           checkAnswer(userClickedPattern.length - 1);
-        //  equalArrays(gamePattern, userClickedPattern);
         });
     $("body").off("keydown");
     });
@@ -125,15 +115,13 @@ function checkAnswer(currentLevel) {
 
           $(userSelection).addClass("pressed");
           setTimeout(function() {
-          $(userSelection).removeClass("pressed")}, 100);
+            $(userSelection).removeClass("pressed")}, 100);
 
 
-          userClickedPattern.push(selectedID);
-          userSound.play();
+            userClickedPattern.push(selectedID);
+            userSound.play();
 
-          console.log(userClickedPattern);
-          checkAnswer(userClickedPattern.length - 1);
-        //  equalArrays(gamePattern, userClickedPattern);
+            checkAnswer(userClickedPattern.length - 1);
         });
     $("body").off("touchstart");
     });
@@ -142,28 +130,10 @@ function checkAnswer(currentLevel) {
   }
 }
 
-/*function eqaulArrays(arr1, arr2) {
-  var convert1 = arr1.toString();
-  var convert2 = arr2.toString();
- if (arr1.toString() === arr2.toString() && (arr1.length === arr2.length) ) {
-    setTimeout(nextSequence, 600);
-    if (convert2.length === convert1.length && (convert2 === convert2)) {
-      nextSequence();
-    //console.log(arr1);
-    //console.log(arr2);
-  } else {
-    roundLost.play();
-
-  }
-};*/
-
 function newGame() {
   gamePattern = [];
   userClickedPattern = [];
   level = 0;
-
-  //$(" h1#level-title").removeClass("game-over-spacing");
-
 
 }
 
@@ -171,15 +141,3 @@ function h1LevelChange() {
   var newLevel = level++;
   $("#level-title").text("Level " + newLevel);
 }
-
-function vibrate(duration) {
-  navigator.vibrate(duration);
-}
-
-/*function nextLevel() {
-  h1LevelChange();
-  nextSequence();
-  currentSquareID.delay(999).fadeOut(150).fadeIn(150);
-
-  console.log(nextSequence());
-}*/
