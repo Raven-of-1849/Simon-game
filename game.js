@@ -132,7 +132,9 @@ function checkAnswer(currentLevel) {
 
 function newGame() {
   gamePattern = [];
+  userClickedPattern = [];
   level = 0;
+
 }
 
 function h1LevelChange() {
